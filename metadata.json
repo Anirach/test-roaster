@@ -1,0 +1,5 @@
+{
+  "name": "IntelliRoster AI",
+  "description": "An AI-powered application for optimizing hospital staff scheduling and rostering. It features demand-driven shift optimization, skill-mix balancing, and a chatbot for staff inquiries.",
+  "requestFramePermissions": []
+}
