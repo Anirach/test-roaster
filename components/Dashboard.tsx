@@ -6,14 +6,15 @@ import { RosterView } from './RosterView';
 import { OptimizationPanel } from './OptimizationPanel';
 import { generateOptimalRoster } from '../services/geminiService';
 import { Theme } from '../App';
-import { MoonIcon, SunIcon } from './icons';
+import { MoonIcon, SunIcon, MenuIcon } from './icons';
 
 interface DashboardProps {
   theme: Theme;
   toggleTheme: () => void;
+  toggleSidebar: () => void;
 }
 
-export const Dashboard: React.FC<DashboardProps> = ({ theme, toggleTheme }) => {
+export const Dashboard: React.FC<DashboardProps> = ({ theme, toggleTheme, toggleSidebar }) => {
   const [roster, setRoster] = useState<ShiftAssignment[]>(INITIAL_ROSTER);
 
   const handleGenerateRoster = useCallback(async (constraints: string): Promise<ShiftAssignment[] | null> => {
@@ -28,9 +29,18 @@ export const Dashboard: React.FC<DashboardProps> = ({ theme, toggleTheme }) => {
   return (
     <main className="p-4 sm:p-6 lg:p-8 space-y-6">
       <header className="flex justify-between items-center">
-        <div>
-          <h1 className="text-3xl font-bold text-brand-text-primary dark:text-dark-brand-text-primary">ED Staffing Dashboard</h1>
-          <p className="text-brand-text-secondary dark:text-dark-brand-text-secondary mt-1">AI-powered insights for optimal scheduling.</p>
+        <div className="flex items-center gap-4">
+            <button
+                onClick={toggleSidebar}
+                className="p-2 rounded-full text-brand-text-secondary hover:bg-gray-200 dark:hover:bg-slate-700 dark:text-dark-brand-text-secondary transition-colors lg:hidden"
+                aria-label="Toggle sidebar"
+            >
+                <MenuIcon className="w-6 h-6" />
+            </button>
+            <div>
+                <h1 className="text-3xl font-bold text-brand-text-primary dark:text-dark-brand-text-primary">ED Staffing Dashboard</h1>
+                <p className="text-brand-text-secondary dark:text-dark-brand-text-secondary mt-1">AI-powered insights for optimal scheduling.</p>
+            </div>
         </div>
         <button
           onClick={toggleTheme}
